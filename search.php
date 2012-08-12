@@ -1,0 +1,72 @@
+<?php
+    include 'jargonLibrary.php';
+echo "<!DOCTYPE html>\n";
+echo "<html>\n";
+echo "\n";
+echo "<head>\n";
+echo "<meta name=\"viewport\" content=\"width=device-width, minimum-scale=1, maximum-scale=1\">\n";
+echo "<title>Mobile Jargon File</title>\n";
+echo "\n";
+echo "<style>\n";
+echo "    .imDiv\n";
+echo "    {\n";
+echo "    float: left;\n";
+echo "    padding-right: 1em;\n";
+echo "    padding-bottom: 1em;\n";
+echo "    }\n";
+echo "\n";
+echo "    .black\n";
+echo "    {\n";
+echo "            color:black\n";
+echo "    }\n";
+echo "</style>\n";
+echo "\n";
+echo "<!--3 Files to include: 1 css and 2 js files-->\n";
+echo "<link rel=\"stylesheet\" href=\"http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.css\"></link>\n";
+echo "<script src=\"http://code.jquery.com/jquery-1.6.4.min.js\"></script>\n";
+echo "<script src=\"http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.js\"></script>\n";
+echo "\n";
+echo "</head>\n";
+echo "\n";
+echo "<body width = \"100%\" class = \"bodyclass\">\n";
+echo "\n";
+echo "<section id = \"MainPage\" data-role = \"page\">\n";
+echo "  <header data-role = \"header\">\n";
+echo " \n";
+echo "    <h1>The Hacker Dictionary</h1>\n";
+echo "  </header>\n";
+echo "      <div class = \"ui-btn-active\" data-role = \"navbar\">\n";
+echo "    <ul data-role = \"navbar\">\n";
+echo "       <li><a href = \"index.php#NewSearch\" data-transition=\"fade\">NEW SEARCH</a></li>\n";
+echo "       <li><a href = \"index.php#TopRated\" data-transition=\"fade\">TOP RATED</a></li>\n";
+echo "       <li><a href = \"random.php\" data-transition=\"fade\">RANDOM</a></li>\n";
+echo "    </ul>\n";
+echo "  </div> \n";
+
+    //print_r($_POST);
+    $o_search = new JarSearch();
+    $o_search->search($_POST['searchtext']);
+    echo "<div class = \"content\" data-role = \"content\">";
+	echo "<ul data-role = \"listview\">";
+        echo "<form method=\"post\" action=\"jargon.php\">\n";
+    foreach($o_search->getNames() as $i => $item){
+            echo '<li>';
+            //echo '$item['.$i. ']: ' . $item;
+            echo "<input type=\"submit\" name=\"result\" value=\"" . $item . "\">";
+            echo'</li>';
+    }
+    echo "</form>";
+    echo "</ul>";
+	echo "</div>";
+
+echo "  <footer data-role = \"footer\" data-position=\"fixed\">\n";
+echo "		<div class = \"ui-btn-active\" data-role = \"navbar\">\n";
+echo "			<ul data-role = \"navbar\">\n";
+echo "				<li><a href=\"index.php\" data-role=\"navbar\" data-transition=\"fade\">Back to Main Page</a></li>\n";
+echo "			</ul>\n";
+echo "		</div>\n";
+echo "  </footer>\n";
+echo "</section>\n";
+echo "</body>\n";
+echo "</html>\n";
+?>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+
+<!--For voting, example "http://net.tutsplus.com/tutorials/html-css-techniques/building-a-5-star-rating-system-with-jquery-ajax-and-php/"-->
+
+
+
+<html>
+
+<head>
+<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+<title>Mobile Jargon File</title>
+
+<style>
+    .imDiv
+    {
+    float: left;
+    padding-right: 1em;
+    padding-bottom: 1em;
+    }
+
+    .black
+    {
+            color:black
+    }
+</style>
+
+<!--3 Files to include: 1 css and 2 js files-->
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.css"></link>
+<script src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.js"></script>
+
+</head>
+
+<body width = "100%" class = "bodyclass">
+
+<section id = "MainPage" data-role = "page">
+  <header data-role = "header">
+    <h1>THE JARGON FILE</h1>  
+  </header>
+
+	<div style="margin:20px auto; text-align: left;">
+		<h2>The Hacker Dictionary</h2>
+	</div>
+
+  <div data-role = "listview">
+	<div class ="black">
+    <ul data-role = "listview">
+       <li><a href = "#NewSearch" data-transition="fade">NEW SEARCH</a></li>
+	   <li></br></li>
+       <li><a href = "#TopRated" data-transition="fade">TOP RATED</a></li>
+	   <li></br></li>
+       <li><a href = "#Random" data-transition="fade">RANDOM</a></li>
+    </ul>
+	</div>
+	
+  </div>  
+
+  <footer data-role = "footer" data-position="fixed">
+    <h1>Main Page</h1>
+  </footer>
+</section>
+
+<section id = "NewSearch" data-role = "page">
+  <header data-role = "header">
+ 
+    <h1>The Hacker Dictionary</h1>
+  </header>
+      <div class = "ui-btn-active" data-role = "navbar">
+
+    <ul data-role = "navbar">
+       <li><a href = "#NewSearch" data-transition="fade">NEW SEARCH</a></li>
+       <li><a href = "#TopRated" data-transition="fade">TOP RATED</a></li>
+       <li><a href = "#Random" data-transition="fade">RANDOM</a></li>
+    </ul>
+
+	
+  </div> 
+
+  <h1>SEARCH</h1>  
+  
+  <?php
+    include_once 'jargonLibrary.php';
+    if (isset($_POST['searchtext'])){
+        $term=$_POST['searchtext'];
+        
+        $o_search = new JarSearch();
+        print_r($o_search);
+        $o_search->search($term);
+        
+        foreach($o_search->getNames() as $i => $item)
+            echo '<br> $item['.$i. ']: ' . $item;
+        
+        //$term2=$_POST['searchtext'] . '.html';
+        //include $term2;
+    } else {
+        include 'search.php';
+    }
+?>
+  <footer data-role = "footer" data-position="fixed">
+		<div class = "ui-btn-active" data-role = "navbar">
+			<ul data-role = "navbar">
+				<li><a href="#MainPage" data-role="navbar" data-transition="fade">Back to Main Page</a></li>
+			</ul>
+		</div>
+  </footer>
+</section>
+
+<section id = "TopRated" data-role = "page">
+  
+	<header data-role = "header">
+		<h1>Top Rated</h1>
+	</header>
+     
+	<div class = "ui-btn-active" data-role = "navbar">
+		<ul data-role = "navbar">
+			<li><a href = "#NewSearch" data-transition="fade">NEW SEARCH</a></li>
+			<li><a href = "#TopRated" data-transition="fade">TOP RATED</a></li>
+			<li><a href = "#Random" data-transition="fade">RANDOM</a></li>
+		</ul>
+    </div> 
+	
+	<h2>Top Word</h2>
+	<p data-inline:"true">TESTING</p>
+	
+	<blockquote>This is the definition for the word that will be brought out of the html file and displayed on the screen</blockquote></br>
+	<hr>
+	<h2>Second Top Word</h2>
+	<blockquote>This is the definition for the word that will be brought out of the html file and displayed on the screen</blockquote></br>
+	<hr>
+	<h2>Third Top Word</h2>
+	<blockquote>This is the definition for the word that will be brought out of the html file and displayed on the screen</blockquote></br>
+
+  <footer data-role = "footer" data-position="fixed">
+		<div class = "ui-btn-active" data-role = "navbar">
+			<ul data-role = "navbar">
+				<li><a href="#MainPage" data-role="navbar" data-transition="fade">Back to Main Page</a></li>
+			</ul>
+		</div>
+  </footer>
+</section>
+
+<section id = "Random" data-role = "page">
+	<header data-role = "header">
+		<h1>Random</h1>
+	</header>
+		<div class = "ui-btn-active" data-role = "navbar">
+			<ul data-role = "navbar">
+				<li><a href = "#NewSearch" data-transition="fade">NEW SEARCH</a></li>
+				<li><a href = "#TopRated" data-transition="fade">TOP RATED</a></li>
+				<li><a href = "#Random" data-transition="fade">RANDOM</a></li>
+			</ul>
+		</div> 
+		</br>
+
+		<input type="submit" value="Ramdomize" /></br>
+		
+		
+		<h2 class="randomHead">Word</h2>
+		<blockquote class="randomDef">This is the definition for the word that will be brought out of the html file and displayed on the screen</blockquote>
+  
+  
+  <footer data-role = "footer" data-position="fixed">
+      
+		<div class = "ui-btn-active" data-role = "navbar">
+			<ul data-role = "navbar">
+				<li><a href="#MainPage" data-role="navbar" data-transition="fade">Back to Main Page</a></li>
+			</ul>
+		</div>
+  
+  </footer>
+</section>
+
+
+
+</body>
+</html>
